@@ -1,0 +1,1 @@
+Download the data from Kaggle. And Unpack file train_2.csv.zip and move train_2.csv to train_final.csv in the directory
