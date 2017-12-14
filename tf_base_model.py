@@ -98,7 +98,7 @@ class TFBaseModel(object):
 
         self.graph = self.build_graph()
         self.session = tf.Session(graph=self.graph)
-        print 'built graph'
+        print('built graph')
 
     def calculate_loss(self):
         raise NotImplementedError('subclass must implement this')
@@ -125,7 +125,7 @@ class TFBaseModel(object):
             while step < self.num_training_steps:
 
                 # validation evaluation
-                val_batch_df = val_generator.next()
+                val_batch_df = val_generator.__next__()
                 val_feed_dict = {
                     getattr(self, placeholder_name, None): data
                     for placeholder_name, data in val_batch_df if hasattr(self, placeholder_name)
@@ -146,16 +146,16 @@ class TFBaseModel(object):
                 if hasattr(self, 'monitor_tensors'):
                     for name, tensor in self.monitor_tensors.items():
                         [np_val] = self.session.run([tensor], feed_dict=val_feed_dict)
-                        print name
-                        print 'min', np_val.min()
-                        print 'max', np_val.max()
-                        print 'mean', np_val.mean()
-                        print 'std', np_val.std()
-                        print 'nans', np.isnan(np_val).sum()
-                        print
+                        print(name)
+                        print("min={}".format(np_val.min()))
+                        print("max={}".format(np_val.max()))
+                        print("mean={}".format(np_val.mean()))
+                        print("std={}".format(np_val.std()))
+                        print("nans={}".format(np.isnan(np_val).sum()))
+                        print("")
 
                 # train step
-                train_batch_df = train_generator.next()
+                train_batch_df = train_generator.__next__()
                 train_feed_dict = {
                     getattr(self, placeholder_name, None): data
                     for placeholder_name, data in train_batch_df if hasattr(self, placeholder_name)
@@ -288,7 +288,7 @@ class TFBaseModel(object):
         date_str = datetime.now().strftime('%Y-%m-%d_%H-%M')
         log_file = 'log_{}.txt'.format(date_str)
 
-        reload(logging)  # bad
+        #reload(logging)  # bad
         logging.basicConfig(
             filename=os.path.join(log_dir, log_file),
             level=logging.INFO,

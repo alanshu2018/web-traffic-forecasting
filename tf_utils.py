@@ -19,8 +19,12 @@ def temporal_convolution_layer(inputs, output_units, convolution_width, causal=F
     """
     with tf.variable_scope(scope, reuse=reuse):
         if causal:
-            shift = (convolution_width / 2) + (int(dilation_rate[0] - 1) / 2)
-            pad = tf.zeros([tf.shape(inputs)[0], shift, inputs.shape.as_list()[2]])
+            shift = (convolution_width // 2) + (int(dilation_rate[0] - 1) // 2)
+            shift = int(shift)
+            #input_shape = shape(inputs)
+            input_shape = tf.shape(inputs,out_type=tf.int32)
+            #pad = tf.zeros([tf.shape(inputs)[0], shift, inputs.shape.as_list()[2]])
+            pad = tf.zeros([input_shape[0], shift, input_shape[2]])
             inputs = tf.concat([pad, inputs], axis=1)
 
         W = tf.get_variable(
@@ -87,10 +91,11 @@ def time_distributed_dense_layer(inputs, output_units, bias=True, activation=Non
 
 def shape(tensor, dim=None):
     """Get tensor shape/dimension as list/int"""
+    shape = tensor.get_shape() #tf.shape(tensor)
     if dim is None:
-        return tensor.shape.as_list()
+        return shape.as_list()
     else:
-        return tensor.shape.as_list()[dim]
+        return shape.as_list()[dim]
 
 
 def sequence_smape(y, y_hat, sequence_lengths, is_nan):

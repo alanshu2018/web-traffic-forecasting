@@ -29,9 +29,9 @@ class DataReader(object):
         self.test_df = DataFrame(columns=data_cols, data=data)
         self.train_df, self.val_df = self.test_df.train_test_split(train_size=0.95)
 
-        print 'train size', len(self.train_df)
-        print 'val size', len(self.val_df)
-        print 'test size', len(self.test_df)
+        print ('train size', len(self.train_df))
+        print ('val size', len(self.val_df))
+        print ('test size', len(self.test_df))
 
     def train_batch_generator(self, batch_size):
         return self.batch_generator(
@@ -144,7 +144,7 @@ class cnn(TFBaseModel):
 
         self.log_x_encode_mean = sequence_mean(tf.log(self.x_encode + 1), self.encode_len)
         self.log_x_encode = self.transform(self.x_encode)
-        self.x = tf.expand_dims(self.log_x_encode, 2)
+        self.x = tf.expand_dims(self.log_x_encode, 2) # minus mean and expand to (batch_size, encode_len, 1)
 
         self.encode_features = tf.concat([
             tf.expand_dims(self.is_nan_encode, 2),
