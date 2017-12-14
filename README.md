@@ -3,7 +3,7 @@ This is imported project of a 6th place solution for kaggle competition "Web Tra
 
 The original solution works for tensorflow 1.3.0 and python 2.7, I makes some changes to work for python 3.4.
 
-# ================= The original README.md     ====================
+# The original README.md 
 # Web Traffic Forecasting
 My solution for the Web Traffic Forecasting competition hosted on Kaggle.
 
