@@ -4,9 +4,9 @@ This is imported project of a 6th place solution for kaggle competition "Web Tra
 The original solution works for tensorflow 1.3.0 and python 2.7, I makes some changes to work for python 3.4.
 
 # Run the code
-### 1. Download the data from kaggle for this competition, unpack train_2.csv.zip into directory data/raw/ and change file to train_final.csv
-### 2. Generated the training data by running: python prepare_data.py
-### 3. Start training and predict: python cnn.py
+1. Download the data from kaggle for this competition, unpack train_2.csv.zip into directory data/raw/ and change file to train_final.csv
+2. Generated the training data by running: python prepare_data.py
+3. Start training and predict: python cnn.py
 
 # The original README.md 
 # Web Traffic Forecasting
